@@ -6,7 +6,7 @@ const modelSchema = new mongoose.Schema({
   cpf: String,
   vooId: String,
   statusCheckIn: String,
-});
+}, { versionKey: false });
 
 const modelName = "passageiros";
 

@@ -5,14 +5,14 @@ const modelSchema = new mongoose.Schema({
   numeroVoo: String,
   origem: String,
   destino: String,
-  dataHoraPartida: String,
+  dataHoraPartida: Date,
   PortaoId: String,
   status: {
     type: String,
     enum: ["programado", "embarque", "concluido"],
     required: true,
   },
-});
+}, { versionKey: false });
 
 const modelName = "voo";
 
