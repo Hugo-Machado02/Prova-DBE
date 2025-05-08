@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const apiRoutes = require("./routers/routers");
+const apiRoutes = require("./routers/routersConfig");
 
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise;
