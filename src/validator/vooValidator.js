@@ -1,7 +1,7 @@
 const { checkSchema } = require("express-validator");
 
 module.exports = {
-  editAction: checkSchema({
+  addVoo: checkSchema({
     numeroVoo: {
       notEmpty: true,
       errorMessage: "Número do voo não especificado",
@@ -18,17 +18,47 @@ module.exports = {
     },
     
     dataHoraPartida: {
-      notEmpty: true,
-      errorMessage: "Hora da partida não especificada",
+      isISO8601: {
+        options: { strict: true },
+        errorMessage: "Formato de data e hora inválido (esperado ISO8601)",
+      },
+      toDate: true,
     },
     
-    PortãoId: {
+    PortaoId: {
+        notEmpty: true,
+        errorMessage: "Id do portão Não especificado"
+    },
+    
+    status: {
+        notEmpty: true,
+        errorMessage: "Id do portão não especificado",
+        isIn: {
+            options: [["programado", "embarque", "concluído"]],
+        },
+        errorMessage: "O status do check-in deve ser 'Pendente', 'Embarque', Concluído'"
+    },
+  }),
+
+  editVoo: checkSchema({
+    id: {
+      notEmpty: true,
+      errorMessage: "Id voo não especificado",
+    },
+    
+    status: {
         notEmpty: true,
         errorMessage: "Id do portão não especificado",
         isIn: {
             options: [["Programado", "Embarque", "Concluído"]],
         },
         errorMessage: "O status do check-in deve ser 'Pendente', 'Embarque', Concluído'"
+    },
+  }),
+  deleteVoo: checkSchema({
+    id: {
+      notEmpty: true,
+      errorMessage: "Id não especificado",
     },
   }),
 };
