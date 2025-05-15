@@ -18,6 +18,7 @@ module.exports = {
     },
     
     dataHoraPartida: {
+      notEmpty: true,
       isISO8601: {
         options: { strict: true },
         errorMessage: "Formato de data e hora inválido (esperado ISO8601)",
@@ -29,15 +30,6 @@ module.exports = {
         notEmpty: true,
         errorMessage: "Id do portão Não especificado"
     },
-    
-    status: {
-        notEmpty: true,
-        errorMessage: "Id do portão não especificado",
-        isIn: {
-            options: [["programado", "embarque", "concluído"]],
-        },
-        errorMessage: "O status do check-in deve ser 'Pendente', 'Embarque', Concluído'"
-    },
   }),
 
   editVoo: checkSchema({
@@ -45,14 +37,46 @@ module.exports = {
       notEmpty: true,
       errorMessage: "Id voo não especificado",
     },
+
+    numeroVoo: {
+      notEmpty: false,
+    },
+
+    origem: {
+      optional: { options: { nullable: true } },
+      isLength: {
+        options: { min: 2 },
+        errorMessage: "O nome do passageiro deve ter no mínimo, 2 caracteres",
+      },
+    },
+    
+    destino: {
+      optional: { options: { nullable: true } },
+      isLength: {
+        options: { min: 2 },
+        errorMessage: "O nome do passageiro deve ter no mínimo, 2 caracteres",
+      },
+    },
+    
+    dataHoraPartida: {
+      optional: { options: { nullable: true } },
+      isISO8601: {
+        options: { strict: true },
+        errorMessage: "Formato de data e hora inválido (esperado ISO8601)",
+      },
+      toDate: true,
+    },
+    
+    PortaoId: {
+        notEmpty: false,
+    },
     
     status: {
-        notEmpty: true,
-        errorMessage: "Id do portão não especificado",
+        optional: { options: { nullable: true } },
         isIn: {
-            options: [["Programado", "Embarque", "Concluído"]],
+            options: [["programado", "embarque", "concluido"]],
+            errorMessage: "O status do check-in deve ser 'Pendente', 'Embarque', Concluído'"
         },
-        errorMessage: "O status do check-in deve ser 'Pendente', 'Embarque', Concluído'"
     },
   }),
   deleteVoo: checkSchema({
