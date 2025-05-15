@@ -3,8 +3,7 @@ mongoose.Promise = global.Promise;
 
 const modelSchema = new mongoose.Schema({
   codigo: String,
-  disponivel: String,
-  vinculado: Boolean,
+  disponivel: Boolean,
 }, { versionKey: false });
 
 const modelName = "portaoEmbarque";
