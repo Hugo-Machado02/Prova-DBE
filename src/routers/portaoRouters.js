@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const portaoController = require("../controllers/portaoEmbarqueController");
+const portaoController = require("../controllers/portaoController");
 const portaoValidador = require("../validator/portaoEmbarqueValidator")
 
 router.get("/portoesEmbarque", portaoController.getPortao);
