@@ -42,11 +42,9 @@ class PassageiroService {
     async editPassageiro(data) {
         const update = {};
 
-        if(data.id){
-            const resultPassageiro = await this.passageiroRepository.getUserId(data.id);
-            if(!resultPassageiro){
-                return { error: "Passageiro não encontrado" }
-            }
+        const resultPassageiro = await this.passageiroRepository.getUserId(data.id);
+        if(!resultPassageiro){
+            return { error: "Passageiro não encontrado" }
         }
 
         if (data.nome) {
@@ -72,6 +70,15 @@ class PassageiroService {
         }
 
         if (data.statusCheckIn) {
+            if(data.statusCheckIn == "realizado"){
+                const voo = await this.vooRepository.getIdVoo(resultPassageiro.vooId);
+                if (voo.status == "programado") {
+                    return { error: "O Voo ainda não permite realizar Check-In" }
+                }
+                if (voo.status == "finalizado"){
+                    return { error: "Check-in não realizado - o Voo já foi finalizado" }
+                }
+            }
             update.statusCheckIn = data.statusCheckIn;
         }
 
@@ -102,34 +109,6 @@ class PassageiroService {
             return { error: "Voo não encontrado"}
         }
         return await this.passageiroRepository.getPassageirosVoo(voo._id);
-    }
-
-    //configura o Check-In para o passageiro
-    async checkInPassageiro(id) {
-        if (!id) {
-            return {error: "Id não especificado para Check-in"};
-        }
-
-        const passageiro = await this.passageiroRepository.findOneById(id);
-        if (!passageiro) {
-            return { error: "Passageiro não encontrado" }
-        }
-
-        const voo = await this.vooRepository.findOneById(passageiro.vooId);
-        // Adicione aqui a lógica para verificar o status do voo antes de permitir o check-in
-        if (voo.status == "programado") {
-            return { error: "O Voo ainda não permite realizar Check-In" }
-        }
-        if (voo.status == "finalizado"){
-            return { error: "Check-in não realizado - o Voo já foi finalizado" }
-        }
-        // Por enquanto, apenas atualiza o status do check-in
-        const updateCheckIn = {statusCheckIn: "Confirmado" }; // Ou outro status desejado
-        const opValid = await this.passageiroRepository.update(id, updateCheckIn);
-        if (!opValid) {
-            return { error: "Erro ao realizar o Check-in!" };
-        }
-        return { sucess: true };
     }
 }
 

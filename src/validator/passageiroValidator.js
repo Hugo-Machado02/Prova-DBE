@@ -67,6 +67,13 @@ module.exports = {
     vooId: {
       optional: { options: { nullable: true } },
     },
+    statusCheckIn: {
+      optional: { options: { nullable: true } },
+      notEmpty: true,
+      isIn: {
+        options: [["pendente", "realizado"]],
+      },
+    },
   }),
   deletePassageiro: checkSchema({
     id: {
