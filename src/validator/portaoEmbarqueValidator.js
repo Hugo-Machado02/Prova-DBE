@@ -13,12 +13,14 @@ module.exports = {
       errorMessage: "Id não especificado",
     },
     codigo: {
-      notEmpty: true,
-      errorMessage: "Codigo não especificado",
+      notEmpty: false,
     },
     disponivel: {
+      optional: { options: { nullable: true } },
       notEmpty: true,
-      errorMessage: "disponibilidade não especificada",
+      isIn: {
+        options: [[true, false]],
+      },
     },
   }),
 };
