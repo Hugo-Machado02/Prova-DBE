@@ -6,8 +6,6 @@ const { jwtSecret } = require('../config/secret');
 class AuthService{
     async login(data){
         const {email, password} = data;
-        // console.log({email});
-        // console.log({password});
 
         const funcionario = await FuncionarioRepository.getByEmail(email);
         
