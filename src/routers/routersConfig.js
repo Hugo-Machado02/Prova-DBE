@@ -10,7 +10,7 @@ router.get("/valida-rotas", (req, res) => {
   res.json({ retorno: "true" });
 });
 
-//usa as rotas do portao
+//usa as rotas do funcionario
 router.use("/", funcionarioRouters)
 //usa as rotas do portao
 router.use("/", portaoRouters)
