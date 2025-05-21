@@ -27,4 +27,4 @@ class FuncionarioRepository {
     async deleteByEmail(email) {
       return await FuncionarioModel.findOneAndDelete({ email });
     }
-  }
+}
