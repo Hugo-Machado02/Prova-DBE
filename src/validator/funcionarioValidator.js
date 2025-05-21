@@ -11,22 +11,6 @@ module.exports = {
       errorMessage: "O nome do funcionário deve ter, no mínimo, 2 caracteres",
     },
 
-    // OU
-
-    //nome: {
-    //  notEmpty: {
-    //    errorMessage: "O nome do funcionário não pode estar vazio"
-    //},
-    //  isLength: {
-    //    options: {
-    //      min: 2
-    //    },
-    //    errorMessage: "O nome do funcionário deve ter, no mínimo, 2 caracteres"
-    //  },
-    //},
-
-    //se for esse segundo tem que alterar nos outros debaixo
-
     email: {
       notEmpty: true,
       isLength: {
