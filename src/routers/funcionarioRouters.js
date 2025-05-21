@@ -5,8 +5,8 @@ const authController = require("../controllers/authController");
 const funcionarioValidator = require("../validator/funcionarioValidator")
 // const authValidator = require("../validator/funcionarioValidator")
 
+router.post("/login", authController.authLogin);
 router.get("/funcionarios", funcionarioController.getFuncionarios);
 router.post("/funcionarios/add", funcionarioValidator.addFuncionario, funcionarioController.addFuncionario);
-router.post("/login", authController.authLogin);
 
 module.exports = router;
