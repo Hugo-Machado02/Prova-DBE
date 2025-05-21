@@ -3,7 +3,6 @@ const router = express.Router();
 const funcionarioController = require("../controllers/funcionarioController");
 const authController = require("../controllers/authController");
 const funcionarioValidator = require("../validator/funcionarioValidator")
-// const authValidator = require("../validator/funcionarioValidator")
 
 router.post("/login", authController.authLogin);
 router.get("/funcionarios", funcionarioController.getFuncionarios);
