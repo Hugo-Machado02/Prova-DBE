@@ -99,7 +99,7 @@ class VooService {
   }
 
   async deleteVoo(id) {
-    const voo = await this.vooRepository.findById(id);
+    const voo = await this.vooRepository.getIdVoo(id);
     if (!voo) {
       return { success: false, error: "Voo não encontrado!" };
     }
