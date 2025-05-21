@@ -5,7 +5,7 @@ const modelSchema = new mongoose.Schema({
   nome: String,
   email: { type: String, unique: true},
   cargo: String,
-  senha: String
+  password: String,
 }, { versionKey: false });
 
 const modelName = "funcionarios";
