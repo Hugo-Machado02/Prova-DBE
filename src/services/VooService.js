@@ -93,7 +93,8 @@ class VooService {
     }
 
     if(data.status == "concluido"){
-      await this.portaoRepository.updatePortao(data.PortaoId, { disponivel: true });
+      const voo = await this.vooRepository.getIdVoo(data.id)
+      await this.portaoRepository.updatePortao(voo.PortaoId, { disponivel: true });
     }
     return { success: true };
   }
