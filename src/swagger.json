@@ -483,7 +483,7 @@
                 }
             }
         },
-        "/:{numeroVoo}/passageiros": {
+        "/{numeroVoo}/passageiros": {
             "get": {
                 "summary": "Busca Passageiros por Voo",
                 "description": "Realiza a busca de todos os Passageiros de um Voo",
