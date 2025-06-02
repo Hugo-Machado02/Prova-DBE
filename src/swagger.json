@@ -1,0 +1,654 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API - Sistema de Aeroporto",
+        "Description": "API Destinada a manipulação do conteúdo do Sistema",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:7778/",
+            "description": "API de Testes/Desenvolvimento"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "summary": "Login",
+                "description": "Realiza o login dos Funcionários",
+                "tags": ["funciloginonario"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/login"
+                            },
+                            "examples": {
+                                "login": {
+                                    "value": {
+                                        "email": "hugo.mendes@estudante.ifgoiano.edu.br",
+                                        "password": "1234554321"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Usuário ou Senha inválida"
+                    },
+                    "200": {
+                        "description": "Voo Cadastrado com sucesso"
+                    }
+                }
+            }
+        },
+        "/funcionarios": {
+            "get": {
+                "summary": "Busca Funcionarios",
+                "description": "Realiza a busca de todos os Funcionarios",
+                "tags": ["funcionario"],
+                "responses": {
+                    "500": {
+                        "description": "Funcionários não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/funcionario"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/funcionarios/add": {
+            "post": {
+                "summary": "Cadastro de Funcionários",
+                "description": "Responsável por realizar o cadastro dos Funcionários",
+                "tags": ["funcionario"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/funcionario"
+                            },
+                            "examples": {
+                                "funcionario": {
+                                    "value": {
+                                        "nome": "Hugo Machado Mendes da Silva",
+                                        "email": "hugo.mendes@estudante.ifgoiano.edu.br",
+                                        "cargo": "admin",
+                                        "password": "1234554321"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Portões não encontrados"
+                    },
+                    "200": {
+                        "description": "Voo Cadastrado com sucesso"
+                    }
+                }
+            }
+        },
+
+        "/portoesEmbarque": {
+            "get": {
+                "summary": "Busca Portões de Embarque",
+                "description": "Realiza a busca de todos os Portões de Embarque",
+                "tags": ["portoesEmbarque"],
+                "responses": {
+                    "500": {
+                        "description": "Portões não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/portoesEmbarque"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portoesEmbarque/add": {
+            "post": {
+                "summary": "Cadastro de Portões de Embarque",
+                "description": "Responsável por realizar o cadastro de um novo Portão de Embarque",
+                "tags": ["portoesEmbarque"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/portoesEmbarque"
+                            },
+                            "examples": {
+                                "portoesEmbarque": {
+                                    "value": {
+                                        "codigo": "A08"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Portões não encontrados"
+                    },
+                    "200": {
+                        "description": "Voo Cadastrado com sucesso"
+                    }
+                }
+            }
+        },
+        "/portoesEmbarque/edicao": {
+            "put": {
+                "summary": "Edição do Portões de Embarque",
+                "description": "Realiza a edição dos Portões de Embarque",
+                "tags": ["portoesEmbarque"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/portoesEmbarque"
+                            },
+                            "examples": {
+                                "portoesEmbarque": {
+                                    "value": {
+                                        "id": "683cf36bc1b9c2def724a99a",
+                                        "codigo": "B192"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Edição do Portão não realizado"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passageiro"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/voos": {
+            "get": {
+                "summary": "Busca Todos os Voos",
+                "description": "Realiza a busca de todos os Voos",
+                "tags": ["voos"],
+                "responses": {
+                    "500": {
+                        "description": "Voos não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/voos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/voos/add": {
+            "post": {
+                "summary": "Cadastro de Voos",
+                "description": "Responsável pelo cadastro dos Voos",
+                "tags": ["voos"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/voos"
+                            },
+                            "examples": {
+                                "voo": {
+                                    "value": {
+                                        "numeroVoo": "1111",
+                                        "origem": "Goiania",
+                                        "destino": "Salvador",
+                                        "dataHoraPartida": "2025-12-01T23:59:00.000+00:00",
+                                        "PortaoId": "683384c072717d38976f4e96"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Cadastro não realizado"
+                    },
+                    "401": {
+                        "description": "Token não fornecido"
+                    },
+                    "403": {
+                        "description": "Acesso Negado!"
+                    },
+                    "200": {
+                        "description": "Voo Cadastrado"
+                    }
+                }
+            }
+        },
+        "/voos/edicao": {
+            "put": {
+                "summary": "Edição do Voo",
+                "description": "Responsável pela edição do Voo",
+                "tags": ["voos"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/voos"
+                            },
+                            "examples": {
+                                "voo": {
+                                    "value": {
+                                        "id": "683cf7d724d3ad0e4cad0043",
+                                        "destino": "Brasilia"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Edição não realizada"
+                    },
+                    "401": {
+                        "description": "Token não fornecido"
+                    },
+                    "403": {
+                        "description": "Acesso Negado!"
+                    },
+                    "200": {
+                        "description": "Edição Realizada"
+                    }
+                }
+            }
+        },
+        "/voos/del": {
+            "delete": {
+                "summary": "Deleta um Voo",
+                "description": "Responsável pela exclusão do Voo",
+                "tags": ["voos"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/voos"
+                            },
+                            "examples": {
+                                "voo": {
+                                    "value": {
+                                        "id": "683cf7d724d3ad0e4cad0043"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Voo não encontrado"
+                    },
+                    "200": {
+                        "description": "Voo Excluído"
+                    }
+                }
+            }
+        },
+        "/voos/hoje": {
+            "get": {
+                "summary": "Busca Voos do dia atual",
+                "description": "Realiza a busca de todos os Voos do dia Atual",
+                "tags": ["voos"],
+                "responses": {
+                    "500": {
+                        "description": "Voos não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/voos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/passageiros": {
+            "get": {
+                "summary": "Busca Passageiros",
+                "description": "Realiza a busca de todos os Passageiros",
+                "tags": ["passageiro"],
+                "responses": {
+                    "500": {
+                        "description": "Passageiros não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passageiro"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/passageiros/add": {
+            "post": {
+                "summary": "Cadastro - Passageiros",
+                "description": "Responsável pelo cadastro dos Passageiros",
+                "tags": ["passageiro"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/passageiro"
+                            },
+                            "examples": {
+                                "passageiro": {
+                                    "value": {
+                                        "nome": "Renan Silva Mathias",
+                                        "cpf": "503.108.470-79",
+                                        "vooId": "6833858672717d38976f4ea2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Erro ao cadastrar o Usuário"
+                    },
+                    "200": {
+                        "description": "Voo Cadastrado com sucesso"
+                    }
+                }
+            }
+        },
+        "/passageiros/edicao": {
+            "put": {
+                "summary": "Edição de passageiros",
+                "description": "Realiza a edição dos Passageiros",
+                "tags": ["passageiro"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/passageiro"
+                            },
+                            "examples": {
+                                "passageiro": {
+                                    "value": {
+                                        "id": "683cfcff4c26eccf850aec1a",
+                                        "statusCheckIn": "realizado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Passageiros não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passageiro"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/passageiros/del": {
+            "delete": {
+                "summary": "Edição de passageiros",
+                "description": "Realiza a edição dos Passageiros",
+                "tags": ["passageiro"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/passageiro"
+                            },
+                            "examples": {
+                                "passageiro": {
+                                    "value": {
+                                        "id": "683cfcff4c26eccf850aec0a"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Passageiro não encontrado"
+                    },
+                    "200": {
+                        "description": "Passageiro Excluído"
+                    }
+                }
+            }
+        },
+        "/:{numeroVoo}/passageiros": {
+            "get": {
+                "summary": "Busca Passageiros por Voo",
+                "description": "Realiza a busca de todos os Passageiros de um Voo",
+                "tags": ["passageiro"],
+                "parameters": [
+                    {
+                        "name": "numeroVoo",
+                        "in": "path",
+                        "description": "Passageiros por Voo",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Passageiros não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passageiro"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/passageiros/status": {
+            "get": {
+                "summary": "Busca Status",
+                "description": "Realiza a busca do Status de todos os Passageiros",
+                "tags": ["passageiro"],
+                "responses": {
+                    "500": {
+                        "description": "Passageiros não encontrados"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passageiro"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "portoesEmbarque": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "pattern": "^[a-fA-F0-9]{24}$",
+                        "example": "60dbf6b5f1f2c45678e12345",
+                        "description": "ID do MongoDB (ObjectId de 24 caracteres hexadecimais)"
+                    },
+                    "codigo": {
+                        "type": "string"
+                    }
+                }
+            },
+            "voos": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "pattern": "^[a-fA-F0-9]{24}$",
+                        "example": "60dbf6b5f1f2c45678e12345",
+                        "description": "ID do MongoDB (ObjectId de 24 caracteres hexadecimais)"
+                    },
+                    "numeroVoo": {
+                        "type": "string"
+                    },
+                    "origem": {
+                        "type": "string"
+                    },
+                    "destino": {
+                        "type": "string"
+                    },
+                    "dataHoraPartida": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "PortaoId": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "passageiro": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "pattern": "^[a-fA-F0-9]{24}$",
+                        "example": "60dbf6b5f1f2c45678e12345",
+                        "description": "ID do MongoDB (ObjectId de 24 caracteres hexadecimais)"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "vooId": {
+                        "type": "boolean"
+                    },
+                    "statusCheckIn": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "funcionario": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "pattern": "^[a-fA-F0-9]{24}$",
+                        "example": "60dbf6b5f1f2c45678e12345",
+                        "description": "ID do MongoDB (ObjectId de 24 caracteres hexadecimais)"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cargo": {
+                        "type": "string"
+                    },
+                    "password": {  
+                        "type": "string"
+                    }
+                }
+            },
+
+            "login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {  
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+        }
+
+    }
+    }
+}

@@ -47,7 +47,7 @@ module.exports = {
         const result = await PassageiroService.editPassageiro(data);
 
         if (result) {
-            res.json(result);
+            res.status(200).json(result);
         } else {
             res.status(400).json({ error: result });
         }
@@ -64,7 +64,7 @@ module.exports = {
         const result = await PassageiroService.deletePassageiro(data.id);
 
         if (result) {
-            res.json(result);
+            res.status(200).json(result);
         } else {
             res.status(404).json({ error: result });
         }
@@ -88,7 +88,7 @@ module.exports = {
         const result = await PassageiroService.checkInPassageiro(data.id);
 
         if (result) {
-            res.json(result);
+            res.status(200).json(result);
         } else {
             res.status(400).json({ error: result });
         }

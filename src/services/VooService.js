@@ -100,6 +100,7 @@ class VooService {
   }
 
   async deleteVoo(id) {
+    console.log(id);
     const voo = await this.vooRepository.getIdVoo(id);
     if (!voo) {
       return { success: false, error: "Voo não encontrado!" };
@@ -107,10 +108,10 @@ class VooService {
 
     // Desvincular o portão se estiver vinculado
     if (voo.PortaoId) {
-      await this.portaoRepository.update(voo.PortaoId, { disponivel: false });
+      await this.portaoRepository.updatePortao(voo.PortaoId, { disponivel: false });
     }
 
-    const operation = await this.vooRepository.delete(id);
+    const operation = await this.vooRepository.deleteVoo(id);
     if (!operation) {
       return { success: false, error: "Erro ao deletar o voo!" };
     }
